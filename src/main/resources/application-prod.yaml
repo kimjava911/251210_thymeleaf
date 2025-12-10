@@ -1,0 +1,20 @@
+# DB
+spring:
+  # https://console.aiven.io/signup
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#      ddl-auto: update
+      ddl-auto: validate
+      # 실제로 할 때는 validate, none
+    show-sql: false
+
+logging:
+  level:
+    org.hibernate.SQL: warn
