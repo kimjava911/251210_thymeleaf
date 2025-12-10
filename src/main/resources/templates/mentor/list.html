@@ -16,30 +16,45 @@
     <header th:replace="~{fragments/common :: header}">헤더 영역</header>
 <!--    <div th:insert="~{fragments/common :: header}"></div>-->
 
-    <table border="1">
+    <div th:if="${#lists.isEmpty(mentors)}">
+        <p>등록된 멘토가 없습니다.</p>
+        <a th:href="@{/menor/new}">첫 멘토 등록하기</a>
+    </div>
+
+<!--    <table border="1">-->
+    <table th:unless="${#lists.isEmpty(mentors)}" border="1">
         <thead>
             <tr>
                 <th>번호</th>
                 <th>이름</th>
                 <th>전문분야</th>
-                <th>이메일</th>
+<!--                <th>이메일</th>-->
                 <th>멘티 수</th>
-                <th>등록일</th>
+<!--                <th>등록일</th>-->
                 <th>관리</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${#lists.isEmpty(mentors)}">
-                <td colspan="7">등록된 멘토가 없습니다.</td>
-            </tr>
+<!--            <tr th:if="${#lists.isEmpty(mentors)}">-->
+<!--                <td colspan="7">등록된 멘토가 없습니다.</td>-->
+<!--            </tr>-->
 
             <tr th:each="mentor : ${mentors}">
                 <td th:text="${mentor.id}"></td>
                 <td th:text="${mentor.name}"></td>
-                <td th:text="${mentor.speciality}"></td>
-                <td th:text="${mentor.email ?: '없음'}"></td>
+<!--                <td th:text="${mentor.speciality}"></td>-->
+                <td>
+                    <span th:switch="${mentor.speciality}">
+                        <span th:case="'백엔드'">🖥️ 백엔드</span>
+                        <span th:case="'프런트엔드'">🎨 프런트엔드</span>
+                        <span th:case="'풀스택'">⚡️ 풀스택</span>
+                        <!-- * => 나머지 모두 -->
+                        <span th:case="*" th:text="${mentor.speciality}">기타</span>
+                    </span>
+                </td>
+<!--                <td th:text="${mentor.email ?: '없음'}"></td>-->
                 <td th:text="${#lists.size(mentor.mentees)}"></td>
-                <td th:text="${#temporals.format(mentor.createdAt, 'yyyy-MM-dd')}"></td>
+<!--                <td th:text="${#temporals.format(mentor.createdAt, 'yyyy-MM-dd')}"></td>-->
                 <td>
                     <a th:href="@{/mentor/{id}(id=${mentor.id})}">상세</a>
                 </td>
