@@ -15,5 +15,5 @@ public interface MenteeRepository extends JpaRepository<Mentee, Long> {
 
     // 멘티와 담당 멘토 조회
     @Query("SELECT m FROM Mentee m JOIN FETCH m.mentor WHERE m.id = :id") // mentee -> mentor
-    List<Mentee> findAllWithMentor(@Param("id") Long id);
+    Optional<Mentee> findByIdWithMentor(@Param("id") Long id);
 }
