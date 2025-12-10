@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "MENTOR") // physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 @Getter @Setter @NoArgsConstructor
+@ToString
 public class Mentor extends BaseEntity {
     private String name;
     private String speciality;

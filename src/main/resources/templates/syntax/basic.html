@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- 이게 안 붙어 있어도... -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf 기본 문법</title>
+</head>
+<body>
+    <p th:text="${greeting}">기본 인삿말</p>
+
+    <!-- ToString -->
+    <p th:text="${mentor}">객체</p>
+
+    <!-- getter -> 속성 접근 -> 별도 메서드 호출이 아니더라도 필드명처럼 접근 -->
+    <p>멘토 이름 : <span th:text="${mentor.name}">멘토님</span></p>
+    <p>전문 분야 : <span th:text="${mentor.speciality}">멘토링</span></p>
+    <p>이메일 : <span th:text="${mentor.email}">mento@mento.com</span></p>
+    <p>생성일 : <span th:text="${mentor.createdAt}">2099-12-31</span></p>
+
+    <!-- 유틸리티 객체 -->
+    <p th:text="${currentTime}"></p>
+    <p th:text="${#temporals.format(currentTime, 'yyyy-MM-dd HH:mm')}"></p>
+
+    <p th:text="${#strings.toUpperCase(mentor.email)}"></p>
+    <p th:text="${#lists.size(mentor.mentees)}"></p>
+    <p th:text="${#numbers.formatCurrency(10000)}"></p>
+</body>
+</html>
