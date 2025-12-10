@@ -42,14 +42,14 @@
             <tr th:each="mentor : ${mentors}">
                 <td th:text="${mentor.id}"></td>
                 <td th:text="${mentor.name}"></td>
-<!--                <td th:text="${mentor.speciality}"></td>-->
+<!--                <td th:text="${mentor.specialty}"></td>-->
                 <td>
-                    <span th:switch="${mentor.speciality}">
+                    <span th:switch="${mentor.specialty}">
                         <span th:case="'백엔드'">🖥️ 백엔드</span>
                         <span th:case="'프런트엔드'">🎨 프런트엔드</span>
                         <span th:case="'풀스택'">⚡️ 풀스택</span>
                         <!-- * => 나머지 모두 -->
-                        <span th:case="*" th:text="${mentor.speciality}">기타</span>
+                        <span th:case="*" th:text="${mentor.specialty}">기타</span>
                     </span>
                 </td>
 <!--                <td th:text="${mentor.email ?: '없음'}"></td>-->

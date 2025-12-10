@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 public class Mentor extends BaseEntity {
     private String name;
-    private String speciality;
+    private String specialty;
 //    @Column(unique = true)
     private String email; // 유저라고 가정할 시 가입-탈퇴 -> 1년 이상 보존.
     // 실제 DB 상에서 지우지는 않고 남겨놓는 것 -> Soft Delete -> 보존 가능한 기간까지 두고... -> delete
@@ -25,7 +25,7 @@ public class Mentor extends BaseEntity {
     // setter로 하나씩 넣는게 귀찮아서(?) 넣는 생성자
     public Mentor(String name, String speciality, String email) {
         this.name = name;
-        this.speciality = speciality;
+        this.specialty = speciality;
         this.email = email;
     }
 

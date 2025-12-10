@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: htmlHead(|멘토 상세 - ${mentor.name}|)}"></head>
+<body>
+    <!-- http://localhost:8080/mentor/1   -->
+
+    <!-- 헤더 삽입 -->
+    <header th:replace="~{fragments/common :: header}">헤더 영역</header>
+<!--    <div th:insert="~{fragments/common :: header}"></div>-->
+
+    <main>
+        <h1>멘토 상세 정보</h1>
+        <div th:replace="~{fragments/common :: mentorCard(${mentor})}"></div>
+
+        <section>
+            <h2>담당 멘티 목록</h2>
+
+            <p th:if="${mentor.mentees.isEmpty()}">
+                담당 멘티 없음
+            </p>
+            <p th:unless="${mentor.mentees.isEmpty()}">
+                <div th:each="mentee, status : ${mentor.mentees}">
+                    <p th:text="${mentee}"></p>
+                    <p th:text="${status}"></p>
+                </div>
+            </p>
+
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+</html>

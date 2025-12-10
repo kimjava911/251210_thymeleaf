@@ -39,9 +39,11 @@ public class MentorController {
 
     // http://localhost:8080/mentor/1
     @GetMapping("/mentor/{id}")
-    @ResponseBody // -> JSON Return
-//    public String mentorDetail(Model model, @PathVariable Long id) {
-    public Mentor mentorDetail(Model model, @PathVariable Long id) {
-        return mentorService.findByIdWithMentees(id);
+//    @ResponseBody // -> JSON Return
+    public String mentorDetail(Model model, @PathVariable Long id) {
+//    public Mentor mentorDetail(Model model, @PathVariable Long id) {
+//        return mentorService.findByIdWithMentees(id);
+        model.addAttribute("mentor", mentorService.findByIdWithMentees(id));
+        return "mentor/detail";
     }
 }
