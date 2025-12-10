@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 프래그먼트 -->
+<header th:fragment="header">
+    <nav>
+        <a th:href="@{/}">홈</a>
+        <a th:href="@{/mentor/list}">멘토 관리</a>
+        <a th:href="@{/mentee/list}">멘티 관리</a>
+    </nav>
+    <hr>
+</header>
+
+<!-- 푸터 프래그먼트 -->
+<footer th:fragment="footer">
+    <hr>
+    <p>2025, 멘토-멘티 관리 시스템</p>
+</footer>
+
+<!-- 패러미터를 받는 프래그먼트 / head -->
+<head th:fragment="htmlHead(title)">
+<!--  프래그먼트명(패러미터)  -->
+    <meta charset="UTF-8">
+    <title th:text="${title}">기본 제목</title>
+    <!-- https://getbootstrap.com/ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- https://noonnu.cc/ -->
+    <style>
+        @font-face {
+            font-family: 'SchoolSafetyKidariBalloon';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2511-1@1.0/HakgyoansimKidaripungseonL.woff2') format('woff2');
+            font-weight: normal;
+            font-display: swap;
+        }
+        :root, * {
+            font-family: SchoolSafetyKidariBalloon;
+        }
+    </style>
+    <!--  favicon -> file 경로 -->
+    <!--  og tag -> file 경로 -->
+    <!--  Google Analytics?  -->
+    <!--  SEO (Search Engine Optimization)  -->
+</head>
+
+
+<!-- 사이드바 프래그먼트 -->
+<aside th:fragment="mentorCard(mentor)">
+    <div>
+        <h3 th:text="${mentor.name}"></h3>
+        <p th:text="|전문분야: ${mentor.specialty}|"></p>
+        <p th:text="|이메일: ${mentor.email}|"></p>
+    </div>
+</aside>
