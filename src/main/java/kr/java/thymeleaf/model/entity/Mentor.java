@@ -23,9 +23,9 @@ public class Mentor extends BaseEntity {
     // -> 이 사람이 작성한 글, 댓글, 여러 통계 지표들을 (개인정보 삭제에 따른) 손실 없이 관리할 수 있다
 
     // setter로 하나씩 넣는게 귀찮아서(?) 넣는 생성자
-    public Mentor(String name, String speciality, String email) {
+    public Mentor(String name, String specialty, String email) {
         this.name = name;
-        this.specialty = speciality;
+        this.specialty = specialty;
         this.email = email;
     }
 
