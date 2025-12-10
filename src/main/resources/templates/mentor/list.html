@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${pageTitle}">타이틀 제목</title>
+</head>
+<body>
+    <!-- http://localhost:8080/mentor/list   -->
+    <h1 th:text="${pageTitle}">사이트 제목</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>전문분야</th>
+                <th>이메일</th>
+                <th>멘티 수</th>
+                <th>등록일</th>
+                <th>관리</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(mentors)}">
+                <td colspan="7">등록된 멘토가 없습니다.</td>
+            </tr>
+
+            <tr th:each="mentor : ${mentors}">
+                <td th:text="${mentor.id}"></td>
+                <td th:text="${mentor.name}"></td>
+                <td th:text="${mentor.speciality}"></td>
+                <td th:text="${mentor.email ?: '없음'}"></td>
+                <td th:text="${#lists.size(mentor.mentees)}"></td>
+                <td th:text="${#temporals.format(mentor.createdAt, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <a th:href="@{/mentor/{id}(id=${mentor.id})}">상세</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
