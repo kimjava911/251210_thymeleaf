@@ -22,5 +22,5 @@ public class Mentee extends BaseEntity {
     // 다대일
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
-    private Mento mentor;
+    private Mentor mentor;
 }
