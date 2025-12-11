@@ -21,46 +21,39 @@
         <a th:href="@{/menor/new}">첫 멘토 등록하기</a>
     </div>
 
-<!--    <table border="1">-->
     <table th:unless="${#lists.isEmpty(mentors)}" border="1">
         <thead>
             <tr>
                 <th>번호</th>
                 <th>이름</th>
                 <th>전문분야</th>
-<!--                <th>이메일</th>-->
                 <th>멘티 수</th>
-<!--                <th>등록일</th>-->
                 <th>관리</th>
             </tr>
         </thead>
         <tbody>
-<!--            <tr th:if="${#lists.isEmpty(mentors)}">-->
-<!--                <td colspan="7">등록된 멘토가 없습니다.</td>-->
-<!--            </tr>-->
-
             <tr th:each="mentor : ${mentors}">
                 <td th:text="${mentor.id}"></td>
                 <td th:text="${mentor.name}"></td>
-<!--                <td th:text="${mentor.specialty}"></td>-->
                 <td>
                     <span th:switch="${mentor.specialty}">
                         <span th:case="'백엔드'">🖥️ 백엔드</span>
                         <span th:case="'프런트엔드'">🎨 프런트엔드</span>
                         <span th:case="'풀스택'">⚡️ 풀스택</span>
-                        <!-- * => 나머지 모두 -->
                         <span th:case="*" th:text="${mentor.specialty}">기타</span>
                     </span>
                 </td>
-<!--                <td th:text="${mentor.email ?: '없음'}"></td>-->
                 <td th:text="${#lists.size(mentor.mentees)}"></td>
-<!--                <td th:text="${#temporals.format(mentor.createdAt, 'yyyy-MM-dd')}"></td>-->
                 <td>
                     <a th:href="@{/mentor/{id}(id=${mentor.id})}">상세</a>
+                    <a th:href="@{/mentor/{id}/edit(id=${mentor.id})}">수정</a>
+                    <a th:href="@{/mentor/{id}/delete(id=${mentor.id})}"
+                        onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
                 </td>
             </tr>
         </tbody>
     </table>
+    <p><a th:href="@{/mentor/new}">새 멘토 등록</a></p>
     <footer th:replace="~{fragments/common :: footer}"></footer>
 </body>
 </html>
