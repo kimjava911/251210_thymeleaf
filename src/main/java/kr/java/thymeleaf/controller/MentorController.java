@@ -55,6 +55,51 @@ public class MentorController {
         return "redirect:/mentor/list";
     }
 
+    // 수정 폼 페이지
+    @GetMapping("/mentor/{id}/edit")
+    public String editMentorForm(@PathVariable Long id, Model model) {
+        Mentor mentor = mentorService.findById(id);
+//        model.addAttribute("mentorForm", new MentorForm(mentor));
+        model.addAttribute("mentorForm", MentorForm.from(mentor));
+        model.addAttribute("specialties",
+                List.of("백엔드", "프론트엔드", "풀스택", "데이터"));
+        // -> @Value, DB의 값.
+        return "mentor/form";
+    }
+
+    @PostMapping("/mentor/{id}/edit")
+    public String updateMentor(
+            @PathVariable Long id,
+            @Valid @ModelAttribute MentorForm form,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("specialties",
+                    List.of("백엔드", "프론트엔드", "풀스택", "데이터"));
+            // bindingResult <- 별도의 작업이 추가로 필요 없음
+            return "mentor/form";
+        }
+        Mentor mentor = mentorService.findById(id);
+        mentor.setName(form.getName());
+        mentor.setSpecialty(form.getSpecialty());
+        mentor.setEmail(form.getEmail());
+        mentorService.save(mentor); // Transaction -> Service.
+
+        redirectAttributes.addFlashAttribute("message", "멘토 정보가 수정되었습니다");
+
+//        return "redirect:/mentor/" + id;
+        return "redirect:/mentor/%d".formatted(id);
+    }
+
+    // 삭제 처리
+    @GetMapping("/mentor/{id}/delete")
+    public String deleteMentor(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        mentorService.delete(id);
+        redirectAttributes.addFlashAttribute("message", "멘토가 삭제되었습니다");
+        return "redirect:/mentor/list";
+    }
+
     // http://localhost:8080/syntax/basic
     @GetMapping("/syntax/basic")
     public String basicSyntax(Model model) {
