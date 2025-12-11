@@ -14,6 +14,8 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor
 @ToString
 public class Mentor extends BaseEntity {
+    // @Column(nullable = false, length = 255) // DB Constraints
+    // -> SQL Exception으로 인식이 됨. 실패를 인식하는 주체가 DB. (DDL)
     private String name;
     private String specialty;
 //    @Column(unique = true)
