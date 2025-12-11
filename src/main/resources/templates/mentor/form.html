@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: htmlHead('멘토 등록')}">
+    <title></title>
+</head>
+<body>
+    <header th:replace="~{fragments/common :: header}"></header>
+
+    <main>
+        <h1>멘토 등록</h1>
+
+        <form
+            th:action="@{/mentor/new}"
+            th:method="post"
+            th:object="${mentorForm}"
+        >
+            <div>
+                <!-- 1. input을 감싸거나 2. for -> id -->
+                <label for="name">이름</label>
+                <!-- 알아서 ID/name -> field -->
+                <input th:field="*{name}" placeholder="이름을 입력하세요">
+
+                <span th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}"></span>
+            </div>
+
+            <div>
+                <label for="specialty">전문 분야</label>
+                <select th:field="*{name}">
+                    <option value="">선택하세요</option>
+                    <option
+                        th:each="sp : ${specialties}"
+                        th:value="${sp}"
+                        th:text="${sp}"
+                    ></option>
+                </select>
+
+                <span th:if="${#fields.hasErrors('specialty')}"
+                      th:errors="*{specialty}"></span>
+            </div>
+
+            <div>
+                <label for="email">이메일</label>
+                <!-- 알아서 ID/name -> field -->
+                <input type="email" th:field="*{email}" placeholder="email@example.com">
+
+                <span th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"></span>
+            </div>
+
+            <div>
+<!--                <button type="submit"></button>-->
+<!--                <input type="button">-->
+                <button th:text="등록">
+                </button>
+                <a th:href="@{/mentor/list}">취소</a>
+            </div>
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+</html>
