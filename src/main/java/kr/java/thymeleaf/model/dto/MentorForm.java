@@ -30,6 +30,7 @@ public class MentorForm {
     @NotBlank(message = "전문 분야를 선택해주세요")
     private String specialty;
 
+    @NotBlank(message = "이메일은 필수입니다")
     @Email(message = "올바른 이메일 형식이 아닙니다")
     private String email;
 

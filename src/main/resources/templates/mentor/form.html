@@ -43,7 +43,8 @@
                 <label for="email">이메일</label>
                 <!-- 알아서 ID/name -> field -->
 <!--                <input type="email" th:field="*{email}" placeholder="email@example.com">-->
-                <input type="email" th:field="*{email}" placeholder="email@example.com">
+                <input th:field="*{email}" placeholder="email@example.com">
+<!--                <input type="email" th:field="*{email}" placeholder="email@example.com">-->
 
                 <span th:if="${#fields.hasErrors('email')}"
                       th:errors="*{email}"></span>
