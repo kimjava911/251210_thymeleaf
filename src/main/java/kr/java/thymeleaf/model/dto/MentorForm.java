@@ -1,7 +1,9 @@
 package kr.java.thymeleaf.model.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import kr.java.thymeleaf.model.entity.Mentor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +26,33 @@ public class MentorForm {
     @NotBlank(message = "이름은 필수입니다") // 검증을 서버에서 함. Controller로 들어오면서 검증
     @Size(min = 2, max = 20, message = "이름은 2~20자 사이여야 합니다")
     private String name;
+
+    @NotBlank(message = "전문 분야를 선택해주세요")
+    private String specialty;
+
+    @Email(message = "올바른 이메일 형식이 아닙니다")
+    private String email;
+
+    // Entity -> DTO 변환
+    public static MentorForm from(Mentor mentor) {
+        MentorForm form = new MentorForm();
+        form.setId(mentor.getId());
+        form.setName(mentor.getName());
+        form.setSpecialty(mentor.getSpecialty());
+        form.setEmail(mentor.getEmail());
+        return form;
+    }
+
+    // 생성자로 하는 방법
+    public MentorForm(Mentor mentor) {
+        this.id = mentor.getId();
+        this.name = mentor.getName();
+        this.specialty = mentor.getSpecialty();
+        this.email = mentor.getEmail();
+    }
+
+    // DTO(현재 객체) -> Entity
+    public Mentor toEntity() {
+        return new Mentor(name, specialty, email); // ID, createdAt (생성할 때 자동 생성)
+    }
 }
