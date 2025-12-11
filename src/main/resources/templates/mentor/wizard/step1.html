@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STEP1</title>
+</head>
+<body>
+    <form th:action="@{/mentor/wizard/step2}" th:method="post"
+          th:object="${mentorForm}">
+        <input th:field="*{name}" placeholder="이름 입력">
+        <input th:field="*{email}" placeholder="이메일">
+        <button>다음 단계</button>
+    </form>
+</body>
+</html>
