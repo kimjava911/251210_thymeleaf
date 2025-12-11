@@ -51,6 +51,7 @@ public class MentorController {
         // 성공 메시지 -> (Redirect -> addFlashAttribute)
         redirectAttributes.addFlashAttribute("message",
                 "멘토가 등록되었습니다.");
+        redirectAttributes.addAttribute("messageType", "success");
 
         return "redirect:/mentor/list";
     }

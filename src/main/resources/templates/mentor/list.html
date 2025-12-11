@@ -7,6 +7,11 @@
 
     <header th:replace="~{fragments/common :: header}">헤더 영역</header>
 
+    <!--  redirect -> flash attribute -> 세션 -> model attribute  -->
+    <p th:if="${message != null}" th:text="${message}"></p>
+    <!--  redirect -> attribute -> 주소창 -> param -->
+    <p th:if="${param.messageType != null}" th:text="${param.messageType}"></p>
+
     <div th:if="${#lists.isEmpty(mentors)}">
         <p>등록된 멘토가 없습니다.</p>
         <a th:href="@{/mentor/new}">첫 멘토 등록하기</a>
