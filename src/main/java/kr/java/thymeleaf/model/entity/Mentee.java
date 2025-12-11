@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "MENTEE")
 @Getter @Setter @NoArgsConstructor
+@ToString(exclude = "mentor")
 public class Mentee extends BaseEntity {
     private String name;
     private String goal; // !

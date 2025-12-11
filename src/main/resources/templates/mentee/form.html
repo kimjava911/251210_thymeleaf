@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: htmlHead('멘티 등록')}">
+    <title></title>
+</head>
+<body>
+    <header th:replace="~{fragments/common :: header}"></header>
+
+    <main>
+        <h1 th:text="'멘티 등록'"></h1>
+
+<!--        <form th:action="${menteeForm.id != null} ? @{/mentee/{id}/edit(id=${menteeForm.id})} : @{/mentee/new}">-->
+        <form th:action="@{/mentee/new}" th:object="${menteeForm}" th:method="post">
+            <div>
+                <label for="name">이름</label>
+                <input th:field="*{name}">
+                <span th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}"
+                ></span>
+            </div>
+
+            <div>
+                <label for="goal">학습 목표</label>
+                <input th:field="*{goal}">
+                <span th:if="${#fields.hasErrors('goal')}"
+                      th:errors="*{goal}"
+                ></span>
+            </div>
+
+            <div>
+                <label for="age">나이</label>
+                <input type="number" th:field="*{age}" min="10" max="100">
+                <span th:if="${#fields.hasErrors('age')}"
+                      th:errors="*{age}"
+                ></span>
+            </div>
+
+            <div>
+                <label for="mentorId">담당 멘토</label>
+                <select th:field="*{mentorId}">
+                    <option value="">멘토 선택 (필수 아님)</option>
+                    <option th:each="mentor : ${mentors}"
+                            th:value="${mentor.id}"
+                            th:text="${mentor.name} + ' (' + ${mentor.specialty} + ')'"></option>
+                </select>
+            </div>
+
+            <div>
+                <button th:text="등록"></button>
+                <a th:href="@{/mentor/list}">취소</a>
+            </div>
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+</html>

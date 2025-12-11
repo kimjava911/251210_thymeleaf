@@ -1,24 +1,15 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport"-->
-<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-<!--    <title th:text="${pageTitle}">타이틀 제목</title>-->
-<!--</head>-->
 <head th:replace="~{fragments/common :: htmlHead(${pageTitle})}"></head>
 <body>
     <!-- http://localhost:8080/mentor/list   -->
     <h1 th:text="${pageTitle}">사이트 제목</h1>
 
-    <!-- 헤더 삽입 -->
     <header th:replace="~{fragments/common :: header}">헤더 영역</header>
-<!--    <div th:insert="~{fragments/common :: header}"></div>-->
 
     <div th:if="${#lists.isEmpty(mentors)}">
         <p>등록된 멘토가 없습니다.</p>
-        <a th:href="@{/menor/new}">첫 멘토 등록하기</a>
+        <a th:href="@{/mentor/new}">첫 멘토 등록하기</a>
     </div>
 
     <table th:unless="${#lists.isEmpty(mentors)}" border="1">
@@ -54,6 +45,7 @@
         </tbody>
     </table>
     <p><a th:href="@{/mentor/new}">새 멘토 등록</a></p>
+    <p><a th:href="@{/mentee/new}">새 멘티 등록</a></p>
     <footer th:replace="~{fragments/common :: footer}"></footer>
 </body>
 </html>
